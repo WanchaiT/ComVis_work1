@@ -11,6 +11,7 @@ class Practice1{
     public static BufferedImage brightnessInverse(BufferedImage img){
         WritableRaster raster = img.getRaster();
         int[] imgPixel = new int[1];
+        imgPixel[0] = 0;
         int imgHeight = img.getHeight();
         int imgWidth = img.getWidth();
 
@@ -27,7 +28,6 @@ class Practice1{
 
     public static void writeImage(BufferedImage img ,String path){
         String[] destPath = path.split("\\.");
-        //System.out.println(toPath[1]);
         int index = destPath[0].lastIndexOf("/");
         String folder = path.substring(0 ,index);
         File outTest = new File(folder);
@@ -38,16 +38,8 @@ class Practice1{
         }
 
         try {
-            //System.out.println("destPath " + toPath[0] + "." + toPath[1]);
             File outFile = new File(path);
             ImageIO.write(img, destPath[1] ,outFile);
-            /*if (folder[0].exists()) {
-                ImageIO.write(img, destPath[1] ,outFile);
-            }else {
-                System.out.println("Error writing image 1");
-                return;
-            }*/
-
         } catch(IOException e) {
             System.err.println("Error writing image");
             return ;
@@ -56,6 +48,7 @@ class Practice1{
 
     public static BufferedImage readImage(String path){
         BufferedImage img = null;
+
         try {
             File imgFile = new File(path);
             img = ImageIO.read(imgFile);
@@ -64,20 +57,16 @@ class Practice1{
             System.err.println("Error loading image");
             System.exit(0);
         }
+
         return img;
     }
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        String soPath = scan.nextLine();
-
-        BufferedImage img = readImage(soPath);
-
+        String sourcePath = scan.nextLine();
+        BufferedImage img = readImage(sourcePath);
+        String destPath = scan.nextLine();
         img = brightnessInverse(img );
-
-        String toPath = scan.nextLine();
-
-        writeImage(img ,toPath);
-
+        writeImage(img ,destPath);
     }
 }
