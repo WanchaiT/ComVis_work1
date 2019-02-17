@@ -6,6 +6,8 @@ import java.awt.image.Raster;
 import java.awt.image.WritableRaster;
 import java.util.Scanner;
 
+// 07590527 07590542
+
 class Practice1{
 
     public static BufferedImage brightnessInverse(BufferedImage img){
